@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❣️</title>
+<style>
+body{
+  margin:0;
+  font-family:"Bookman Old Style", Georgia, serif;
+  background:#ffe6ee;
+  color:#6a1b3a;
+  overflow-x:hidden;
+}
+.section{
+  display:none;
+  min-height:100vh;
+  padding:40px 20px;
+  text-align:center;
+}
+.section.active{display:block;}
+h1{color:#9d1b3f;}
+p{line-height:1.7;}
+.btn,.back-btn{
+  margin:15px;
+  padding:10px 26px;
+  border:none;
+  border-radius:12px;
+  font-size:15px;
+  cursor:pointer;
+  background:#ff6f91;
+  color:white;
+}
+.back-btn{background:#b5838d;}
+.box{
+  display:inline-block;
+  margin:10px;
+  padding:12px 28px;
+  border:2px solid #ff6f91;
+  border-radius:12px;
+  background:#fff0f4;
+  color:#9d1b3f;
+  cursor:pointer;
+}
+/* LETTER */
+.letter{
+  max-width:650px;
+  margin:auto;
+  background:#fffafa;
+  padding:35px;
+  border-radius:16px;
+  box-shadow:0 14px 30px rgba(0,0,0,.15);
+  text-align:left;
+}
+/* VOUCHERS */
+.voucher-row{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.voucher{
+  width:190px;
+  padding:22px;
+  border:2px dashed #ff6f91;
+  border-radius:16px;
+  background:#fff0f4;
+  font-weight:600;
+  cursor:pointer;
+}
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  justify-content:center;
+  align-items:center;
+}
+.modal-content{
+  background:#fff;
+  padding:25px;
+  border-radius:16px;
+  max-width:320px;
+  text-align:center;
+}
+.modal img{
+  width:200px;
+  margin-top:12px;
+}
+/* GALLERY */
+.gallery-uneven{
+  max-width:900px;
+  margin:30px auto;
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  justify-content:center;
+}
+.gallery-uneven img{
+  height:auto;
+  max-width:100%;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.18);
+  transition:transform .3s;
+}
+.gallery-uneven img:nth-child(1){ width:260px; }
+.gallery-uneven img:nth-child(2){ width:320px; }
+.gallery-uneven img:nth-child(3){ width:240px; }
+.gallery-uneven img:nth-child(4){ width:300px; }
+.gallery-uneven img:nth-child(5){ width:220px; }
+.gallery-uneven img:nth-child(6){ width:280px; }
+.gallery-uneven img:nth-child(7){ width:250px; }
+.gallery-uneven img:hover{ transform:scale(1.04); }
+/* FALLING TEXT */
+.falling{
+  position:fixed;
+  top:-20px;
+  animation:fall 6s linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);opacity:0;}
+}
+/* MOBILE */
+@media(max-width:600px){
+  .gallery-uneven img{ width:90% !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SECTION 1: YES/NO -->
+<div class="section active">
+  <h1>Hiee… I made something for you 🌷</h1>
+  <p>Wanna see? (˶˃ ᗜ ˂˶)</p>
+  <div class="box" onclick="yes()">Yes >ᴗ<</div>
+  <div class="box" onclick="no()">No /ᐠ - ˕ -マ</div>
+  <p id="noMsg"></p>
+  <p id="yesMsg" style="color:#9d1b3f;font-weight:600;"></p>
+  <img id="noGif" width="180">
+</div>
+
+<!-- SECTION 2: LETTER -->
+<div class="section">
+  <h1>For my love ❣️</h1>
+  <div class="letter">
+    <p id="letter"></p>
+  </div>
+  <button class="btn" onclick="next()">Continue</button>
+  <button class="back-btn" onclick="back()">← back</button>
+</div>
+
+<!-- SECTION 3: VOUCHERS -->
+<div class="section">
+  <h1>Little vouchers for you 🎁</h1>
+  <div class="voucher-row">
+    <div class="voucher" onclick="openGift(0)">Free Hugs</div>
+    <div class="voucher" onclick="openGift(1)">Free Kissies</div>
+    <div class="voucher" onclick="openGift(2)">Lifetime Coupon</div>
+  </div>
+  <button class="btn" onclick="next()">Next</button>
+  <button class="back-btn" onclick="back()">← back</button>
+</div>
+
+<!-- SECTION 4: GALLERY -->
+<div class="section">
+  <h1>GALLERY SECTION 💗</h1>
+  <p>(Very close to my heart)</p>
+  <div class="gallery-uneven">
+    <img src="IMG1.jpg">
+    <img src="IMG2.jpg">
+    <img src="IMG3.jpg">
+    <img src="IMG4.jpg">
+    <img src="IMG5.jpg">
+    <img src="IMG6.jpg">
+    <img src="IMG7.jpg">
+  </div>
+  <button class="btn" onclick="next()">Next</button>
+  <button class="back-btn" onclick="back()">← back</button>
+</div>
+
+<!-- SECTION 5: LOVE FALL -->
+<div class="section">
+  <h1>How much do you love me? 💞</h1>
+  <div class="box" onclick="loveFall()">Click here</div>
+  <button class="back-btn" onclick="back()">← back</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+let sections=document.querySelectorAll(".section");
+let cur=0;
+function show(){
+  sections.forEach(s=>s.classList.remove("active"));
+  sections[cur].classList.add("active");
+}
+function next(){cur++;show();}
+function back(){cur--;show();}
+
+/* YES / NO MESSAGES */
+let msgs=["please","Why not :(","I made it just for you","please say yes"];
+let mi=0;
+
+function no(){
+  document.getElementById("noMsg").innerText=msgs[mi%msgs.length];
+  document.getElementById("noGif").src="no.gif";
+  mi++;
+}
+
+function yes(){
+  const music = document.getElementById("bgMusic");
+  music.play().catch(()=>{});
+
+  document.getElementById("noMsg").innerText="";
+  document.getElementById("yesMsg").innerText="I know you do! 😏";
+  document.getElementById("noGif").src="yes.gif";
+
+  setTimeout(()=>{
+    cur=1;
+    show();
+    letter.innerHTML="";
+    i=0;
+    typeLetter();
+  },3000);
+}
+
+/* LETTER TYPING */
+const text = `HEYYY MYYYY PYARAAA SWEETUU BACCHAA✨
+Hehe, firstly thankyouuu thankyouuu thankyouuu soooo muchhhh for being with me 😭💗 REALLY!!
+I mean, now I feel like my life was so dull without you. But I’ve found my spark now ❣️
+The reason behind my happiness.
+This is the first time I’m writing something like this... for someone, so I don’t really know how to present it.
+But trust me—I’ve poured my heart into this, and I hope you’ll like it 🤭
+Sooo baccha, getting straight to the point… I’ve already confessed my feelings,
+and now you have too!!!!!! Hihihihihihi—AHEM.
+So can we promise to stay beside each other, together… forever? ♾️🤍
+Making our bond even stronger. THINK THINK!! And tell me.
+From my side, I promise I’ll always be by your side, supporting you.
+No matter what happens—
+THIS GIRL GOT YOUR BACK EVERY TIME!! 💙
+There’s this feeling… it’s really strong, and it keeps getting stronger each day 🤌
+And I’m loving this change in me, in my personality.
+I promise I may not be the best, but I’ll always try to be better—
+just help me 😭
+(And by help, I mean stay with me. Hehe, I KNOW YOU WILL.)
+We’ll have an amazing bond and great company ahead.
+GOD YES, I WAITED FOR THIS. Everything feels worth it now 🌷
+I feel so special, and I’m smiling while writing this—thinking of you.
+Thank you for making me feel cared for and loved,
+for understanding me and being with me 💌
+Some days might’ve been tough, and online it’s hard to sense feelings through a screen,
+but—I love you a lot!! and I always will.
+With my whole heart. Just yours ❣️
+I’m genuinely very happy with you.
+Mwahhh 💞
+I love you. Always.💗`;
+
+let i=0;
+function typeLetter(){
+  if(i<text.length){
+    letter.innerHTML+=text[i]=="\n"?"<br>":text[i];
+    i++;
+    setTimeout(typeLetter,30);
+  }
+}
+
+/* GIFTS */
+const gifts=[
+  {t:"Unlimited Hugssss forrr myyyy cutieeeee babyyyyy 🤍",g:"hug.gif"},
+  {t:"Mwahh mwahh, I LOVE YOU A LOT 😘",g:"kiss.gif"},
+  {t:"You’re stuck with me forever ♾️",g:"forever.gif"}
+];
+function openGift(n){
+  modal.style.display="flex";
+  modalContent.innerHTML=`<p>${gifts[n].t}</p><img src="${gifts[n].g}"><br><span style="cursor:pointer;color:#ff6f91;" onclick="modal.style.display='none'">Close</span>`;
+}
+
+/* LOVE FALL */
+const love=["I love you more💗","Mwahh","I love you a lot✨"];
+function loveFall(){
+  let x=document.createElement("div");
+  x.className="falling";
+  x.innerText=love[Math.floor(Math.random()*love.length)];
+  x.style.left=Math.random()*80+"%";
+  x.style.fontSize="22px";
+  document.body.appendChild(x);
+  setTimeout(()=>x.remove(),7000);
+}
+</script>
+</body>
+</html>
